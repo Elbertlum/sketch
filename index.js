@@ -25,8 +25,22 @@ function clearGrid () {
   $('div.container').empty();
 };
 
+function createNewGrid () {
+  clearGrid();
+  var newSize = window.prompt("How many squares per side?");
+  createGrid(newSize);
+};
+
 $(document).on('mouseenter', '.cell', function() {
-  if ($(this).css('background-color') !== 'rgb(0, 0, 0)') {
-    $(this).css('background-color', 'black');
+  if ($(this).hasClass('entered') === false) {
+    $(this).css('background-color', randomRGB());
+    $(this).addClass('entered')
   }
 });
+
+function randomRGB () {
+  var r = Math.floor(Math.random() * 256).toString();
+  var g = Math.floor(Math.random() * 256).toString();
+  var b = Math.floor(Math.random() * 256).toString();
+  return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+}
